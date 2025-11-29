@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Authenta Suite</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+              mono: ['JetBrains Mono', 'monospace'],
+            },
+            colors: {
+              neon: {
+                400: '#00f3ff',
+                500: '#00dbe6',
+                900: 'rgba(0, 243, 255, 0.1)',
+              },
+              darkbg: '#0f172a',
+              cardbg: '#1e293b',
+            },
+            animation: {
+              'fade-in': 'fadeIn 0.5s ease-out',
+              'slide-up': 'slideUp 0.5s ease-out',
+            },
+            keyframes: {
+              fadeIn: {
+                '0%': { opacity: '0' },
+                '100%': { opacity: '1' },
+              },
+              slideUp: {
+                '0%': { transform: 'translateY(20px)', opacity: '0' },
+                '100%': { transform: 'translateY(0)', opacity: '1' },
+              }
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      body {
+        /* CSS Gradient Fallback if OGL fails */
+        background: radial-gradient(circle at 50% 50%, #1e293b 0%, #0f172a 100%);
+        color: #e2e8f0;
+      }
+      /* Liquid Glass Utilities */
+      .glass-panel {
+        background: rgba(30, 41, 59, 0.6);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+      }
+      .dark .glass-panel {
+        background: rgba(15, 23, 42, 0.6);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+      }
+      /* Light mode glass */
+      html:not(.dark) .glass-panel {
+        background: rgba(255, 255, 255, 0.7);
+        border: 1px solid rgba(0, 0, 0, 0.05);
+        color: #1e293b;
+      }
+
+      /* Custom scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: transparent; 
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #334155; 
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #475569; 
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@18.2.0",
+    "react-dom/client": "https://esm.sh/react-dom@18.2.0/client",
+    "react-router-dom": "https://esm.sh/react-router-dom@6.22.3?deps=react@18.2.0,react-dom@18.2.0",
+    "lucide-react": "https://esm.sh/lucide-react@0.344.0?deps=react@18.2.0",
+    "sonner": "https://esm.sh/sonner@1.4.3?deps=react@18.2.0,react-dom@18.2.0",
+    "react-markdown": "https://esm.sh/react-markdown@9.0.1?deps=react@18.2.0",
+    "firebase/app": "https://esm.sh/firebase@10.8.1/app",
+    "firebase/auth": "https://esm.sh/firebase@10.8.1/auth",
+    "firebase/firestore": "https://esm.sh/firebase@10.8.1/firestore",
+    "firebase/storage": "https://esm.sh/firebase@10.8.1/storage",
+    "firebase/analytics": "https://esm.sh/firebase@10.8.1/analytics",
+    "@google/genai": "https://esm.sh/@google/genai@0.1.1",
+    "ogl": "https://esm.sh/ogl@1.0.11",
+    "jspdf": "https://esm.sh/jspdf@2.5.1",
+    "qrcode": "https://esm.sh/qrcode@1.5.3",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "firebase/": "https://aistudiocdn.com/firebase@^12.6.0/"
+  }
+}
+</script>
+</head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
