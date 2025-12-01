@@ -82,9 +82,9 @@ export const Auth: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-darkbg relative overflow-x-hidden selection:bg-neon-500/30 selection:text-neon-100">
+    <div className="min-h-screen bg-slate-900 relative overflow-x-hidden selection:bg-neon-500/30 selection:text-neon-100">
       {/* --- FIXED BACKGROUND --- */}
-      <div className="fixed inset-0 z-0 opacity-60">
+      <div className="fixed inset-0 z-0 opacity-60 bg-gradient-to-br from-slate-900 via-blue-900/20 to-slate-900">
          <Aurora
           colorStops={["#3A29FF", "#FF94B4", "#FF3232"]}
           blend={0.5}
@@ -99,7 +99,7 @@ export const Auth: React.FC = () => {
         {/* HERO SECTION with Fade Effect */}
         <div 
           className="min-h-screen flex flex-col items-center justify-center p-4 text-center sticky top-0"
-          style={{ opacity: heroOpacity, transform: `scale(${heroScale})` }}
+          style={{ opacity: heroOpacity, transform: `scale(${heroScale})`, pointerEvents: heroOpacity < 0.1 ? 'none' : 'auto' }}
         >
            <div className="space-y-8 flex flex-col items-center animate-fade-in max-w-4xl mx-auto">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-neon-900/30 border border-neon-500/30 text-neon-400 text-sm font-medium backdrop-blur-sm">
@@ -129,7 +129,7 @@ export const Auth: React.FC = () => {
         </div>
 
         {/* EDUCATIONAL SECTION */}
-        <div id="learn-more" className="bg-darkbg/95 border-t border-slate-800 backdrop-blur-xl relative z-20 min-h-screen">
+        <div id="learn-more" className="bg-slate-900/95 border-t border-slate-800 backdrop-blur-xl relative z-20 min-h-screen shadow-[0_-20px_50px_rgba(0,0,0,0.5)]">
           <div className="max-w-6xl mx-auto px-4 py-24">
             
             {/* IP & Copyright */}

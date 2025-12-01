@@ -1,7 +1,9 @@
 import { GoogleGenAI } from "@google/genai";
 import { RewriteMode } from "../types";
 
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+// SAFELY ACCESS API KEY (Fixes "process is not defined" error in browser)
+const apiKey = (typeof process !== 'undefined' && process.env) ? process.env.API_KEY : '';
+const ai = new GoogleGenAI({ apiKey: apiKey });
 
 const MODELS = {
   TEXT: 'gemini-2.5-flash',

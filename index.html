@@ -7,6 +7,14 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <script>
+      // 1. SHIM PROCESS FOR BROWSER (Fixes "process is not defined" crash)
+      window.process = {
+        env: {
+          API_KEY: 'AIzaSyCDYtFS0RBNLAwMNK5YbcQGlsvM5xkO4Qs' 
+        }
+      };
+
+      // 2. TAILWIND CONFIG
       tailwind.config = {
         darkMode: 'class',
         theme: {
@@ -44,11 +52,9 @@
     </script>
     <style>
       body {
-        /* CSS Gradient Fallback if OGL fails */
         background: radial-gradient(circle at 50% 50%, #1e293b 0%, #0f172a 100%);
         color: #e2e8f0;
       }
-      /* Liquid Glass Utilities */
       .glass-panel {
         background: rgba(30, 41, 59, 0.6);
         backdrop-filter: blur(12px);
@@ -59,28 +65,15 @@
         background: rgba(15, 23, 42, 0.6);
         border: 1px solid rgba(255, 255, 255, 0.08);
       }
-      /* Light mode glass */
       html:not(.dark) .glass-panel {
         background: rgba(255, 255, 255, 0.7);
         border: 1px solid rgba(0, 0, 0, 0.05);
         color: #1e293b;
       }
-
-      /* Custom scrollbar */
-      ::-webkit-scrollbar {
-        width: 8px;
-        height: 8px;
-      }
-      ::-webkit-scrollbar-track {
-        background: transparent; 
-      }
-      ::-webkit-scrollbar-thumb {
-        background: #334155; 
-        border-radius: 4px;
-      }
-      ::-webkit-scrollbar-thumb:hover {
-        background: #475569; 
-      }
+      ::-webkit-scrollbar { width: 8px; height: 8px; }
+      ::-webkit-scrollbar-track { background: transparent; }
+      ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+      ::-webkit-scrollbar-thumb:hover { background: #475569; }
     </style>
   <script type="importmap">
 {
@@ -100,8 +93,8 @@
     "ogl": "https://esm.sh/ogl@1.0.11",
     "jspdf": "https://esm.sh/jspdf@2.5.1",
     "qrcode": "https://esm.sh/qrcode@1.5.3",
-    "react/": "https://aistudiocdn.com/react@^19.2.0/",
     "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
     "firebase/": "https://aistudiocdn.com/firebase@^12.6.0/"
   }
 }
@@ -109,5 +102,19 @@
 </head>
   <body>
     <div id="root"></div>
+    <!-- 3. ENTRY POINT (Critical: Actually loads the app) -->
+    <script type="module" src="./index.tsx"></script>
+    <script>
+      window.onerror = function(msg, url, line, col, error) {
+        // Fallback error handler if React fails completely
+        if(document.body.innerHTML === '<div id="root"></div>') {
+           document.body.innerHTML = `<div style="color:red; padding:20px; font-family:sans-serif;">
+             <h1>Application Failed to Start</h1>
+             <p>${msg}</p>
+             <p>Check console for details.</p>
+           </div>`;
+        }
+      };
+    </script>
   </body>
 </html>

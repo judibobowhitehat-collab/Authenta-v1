@@ -128,18 +128,26 @@ export default function Aurora(props: AuroraProps) {
     const ctn = ctnDom.current;
     if (!ctn) return;
 
-    const renderer = new Renderer({
-      alpha: true,
-      premultipliedAlpha: true,
-      antialias: true
-    });
-    const gl = renderer.gl;
-    gl.clearColor(0, 0, 0, 0);
-    gl.enable(gl.BLEND);
-    gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
-    gl.canvas.style.backgroundColor = 'transparent';
-
+    let renderer: any;
+    let gl: any;
     let program: any;
+    let animateId = 0;
+    
+    try {
+        renderer = new Renderer({
+          alpha: true,
+          premultipliedAlpha: true,
+          antialias: true
+        });
+        gl = renderer.gl;
+        gl.clearColor(0, 0, 0, 0);
+        gl.enable(gl.BLEND);
+        gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
+        gl.canvas.style.backgroundColor = 'transparent';
+    } catch (e) {
+        console.warn("WebGL not supported or failed to initialize", e);
+        return; // Gracefully fail if WebGL crashes (e.g. mobile)
+    }
 
     function resize() {
       if (!ctn) return;
@@ -177,7 +185,6 @@ export default function Aurora(props: AuroraProps) {
     const mesh = new Mesh(gl, { geometry, program });
     ctn.appendChild(gl.canvas);
 
-    let animateId = 0;
     const update = (t: number) => {
       animateId = requestAnimationFrame(update);
       const { time = t * 0.01, speed = 1.0 } = propsRef.current;
